@@ -1,2 +1,1 @@
-# -Galactic-Signature-Calculator-
-Galactic Scroll Mapping Portal. Calling forward your Galactic Signature 
+# -Galactic-Signature-Calculatorindex.html Calling forward your Galactic Signature 
