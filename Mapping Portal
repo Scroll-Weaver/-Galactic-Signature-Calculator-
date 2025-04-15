@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galactic Signature Calculator</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #fdf8f2;
+      color: #3e2f2f;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.8rem;
+    }
+    label, input, button {
+      font-size: 1rem;
+      margin-top: 1rem;
+      display: block;
+      width: 100%;
+    }
+    #result {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #fff8e7;
+      border: 1px solid #d8c6ae;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Galactic Signature Calculator</h1>
+  <label for="birthdate">Enter your birthdate:</label>
+  <input type="date" id="birthdate">
+  <button onclick="calculateSignature()">Reveal My Signature</button>
+
+  <div id="result"></div>
+
+  <script>
+    function getGalacticSignature(date) {
+      const tzolkinDayNames = [
+        "Imix", "Ik'", "Ak'b'al", "K'an", "Chikchan", "Kimi", "Manik'", "Lamat", "Muluk", "Ok",
+        "Chuwen", "Eb'", "B'en", "Ix", "Men", "K'ib'", "Kaban", "Etz'nab'", "Kawak", "Ajaw"
+      ];
+
+      const baseDate = new Date('2021-03-01'); // Known 1 Imix date
+      const inputDate = new Date(date);
+      const diffDays = Math.floor((inputDate - baseDate) / (1000 * 60 * 60 * 24));
+      const tzolkinNumber = ((diffDays % 13 + 13) % 13) + 1;
+      const tzolkinNameIndex = ((diffDays % 20 + 20) % 20);
+      const daySign = tzolkinDayNames[tzolkinNameIndex];
+
+      return {
+        tone: tzolkinNumber,
+        daySign: daySign,
+        kin: `${tzolkinNumber} ${daySign}`
+      };
+    }
+
+    function calculateSignature() {
+      const birthDate = document.getElementById('birthdate').value;
+      if (!birthDate) {
+        document.getElementById('result').innerText = 'Please enter a birthdate.';
+        return;
+      }
+      const signature = getGalacticSignature(birthDate);
+      document.getElementById('result').innerHTML = `
+        <strong>Your Galactic Signature:</strong><br>
+        <span style="font-size: 1.2rem;">${signature.kin}</span><br>
+        Tone: ${signature.tone}<br>
+        Day Sign: ${signature.daySign}
+      `;
+    }
+  </script
